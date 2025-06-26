@@ -1,0 +1,536 @@
+/* Basic Resets & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-bg: #121212; /* Hampir hitam untuk latar belakang utama */
+    --darker-bg: #0a0a0a; /* Lebih gelap untuk kontras pada bagian tertentu */
+    --glow-blue: #00bcd4; /* Biru ice terang sebagai warna glow utama */
+    --text-color: #e0e0e0; /* Abu-abu terang untuk teks umum */
+    --light-grey: #a0a0a0; /* Sedikit lebih gelap untuk detail teks */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Animasi scroll yang halus antar section */
+    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Typography & Glow Effect */
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px var(--glow-blue), 0 0 10px var(--glow-blue); /* Efek glow ringan pada judul */
+}
+
+.glow-text {
+    color: var(--glow-blue);
+    text-shadow: 0 0 8px var(--glow-blue), 0 0 15px var(--glow-blue);
+    font-weight: bold;
+}
+
+a {
+    color: var(--glow-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--text-color); /* Berubah warna saat hover */
+    text-shadow: 0 0 10px var(--glow-blue); /* Glow tetap aktif saat hover */
+}
+
+/* Header & Navbar */
+.header {
+    background-color: var(--darker-bg);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.2); /* Garis bawah glow tipis */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sedikit bayangan di bawah header */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--glow-blue);
+    text-shadow: 0 0 5px var(--glow-blue);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Jarak antar link */
+}
+
+.nav-links a {
+    font-size: 1.1em;
+    padding: 5px 0;
+    position: relative;
+    white-space: nowrap; /* Mencegah teks link patah */
+}
+
+.nav-links a::after { /* Animasi underline glow saat hover */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--glow-blue);
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease-in-out;
+    box-shadow: 0 0 8px var(--glow-blue);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hamburger Menu Toggle */
+.menu-toggle {
+    display: none; /* Sembunyikan secara default di desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1001; /* Pastikan di atas elemen lain */
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--glow-blue);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi Hamburger ke X */
+.menu-toggle.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.is-active .bar:nth-child(2) {
+    opacity: 0; /* Sembunyikan bar tengah */
+}
+
+.menu-toggle.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* Sections */
+section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+section:nth-child(even) { /* Latar belakang bergantian untuk kontras visual */
+    background-color: var(--darker-bg);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh; /* Set tinggi minimal 100% tinggi viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://via.placeholder.com/1920x1080/0d0d0d/00bcd4?text=Background+Glow+Blue') no-repeat center center/cover;
+    position: relative;
+    overflow: hidden; /* Pastikan konten tidak keluar */
+}
+
+.hero-section::before { /* Overlay gelap untuk efek glow yang lebih menonjol */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-container { /* Kontainer Flexbox untuk tata letak foto di atas teks */
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column-reverse; /* Ini yang membuat foto di atas teks */
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 40px;
+    gap: 40px; /* Jarak antara foto dan teks */
+}
+
+.hero-content {
+    text-align: center; /* Pusatkan teks untuk tata letak vertikal */
+    max-width: 800px; /* Lebar maksimal konten teks */
+    color: var(--text-color);
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    color: var(--light-grey);
+}
+
+.hero-image {
+    text-align: center; /* Memastikan gambar tetap di tengah */
+}
+
+.hero-image img {
+    width: 300px; /* Ukuran default gambar */
+    height: 300px; /* Ukuran default gambar */
+    border-radius: 50%; /* Membuat gambar lingkaran */
+    object-fit: cover; /* Pastikan gambar mengisi lingkaran tanpa terdistorsi */
+    border: 3px solid var(--glow-blue); /* Border glow */
+    box-shadow: 0 0 20px var(--glow-blue), 0 0 40px rgba(0, 188, 212, 0.5); /* Efek glow pada foto */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.05); /* Sedikit membesar saat hover */
+    box-shadow: 0 0 30px var(--glow-blue), 0 0 60px rgba(0, 188, 212, 0.7); /* Glow lebih kuat saat hover */
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: transparent;
+    border: 2px solid var(--glow-blue);
+    color: var(--glow-blue);
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    min-height: 44px; /* Untuk aksesibilitas mobile: area sentuh minimal */
+    min-width: 44px; /* Untuk aksesibilitas mobile: area sentuh minimal */
+}
+
+.btn.glow-btn {
+    box-shadow: 0 0 10px var(--glow-blue), 0 0 20px var(--glow-blue) inset;
+}
+
+.btn.glow-btn:hover {
+    background-color: var(--glow-blue);
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px var(--glow-blue), 0 0 30px var(--glow-blue) inset;
+    transform: translateY(-3px);
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.portfolio-item {
+    background-color: var(--darker-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Untuk efek glow-border */
+}
+
+.portfolio-item.glow-border {
+    border: 2px solid transparent; /* Border default transparan */
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3); /* Default glow pada item */
+}
+
+.portfolio-item.glow-border:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px var(--glow-blue), 0 0 40px var(--glow-blue); /* Glow lebih kuat saat hover */
+    border-color: var(--glow-blue); /* Border glow saat hover */
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.1); /* Garis bawah tipis pada gambar proyek */
+}
+
+.portfolio-item h3 {
+    margin: 20px 0 10px;
+    font-size: 1.5em;
+    color: var(--glow-blue);
+    text-shadow: 0 0 5px var(--glow-blue);
+}
+
+.portfolio-item p {
+    font-size: 0.95em;
+    color: var(--light-grey);
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.view-project-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--glow-blue);
+    color: var(--glow-blue);
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    min-height: 44px; /* Untuk aksesibilitas mobile */
+    min-width: 44px; /* Untuk aksesibilitas mobile */
+}
+
+.view-project-btn:hover {
+    background-color: var(--glow-blue);
+    color: var(--dark-bg);
+    box-shadow: 0 0 10px var(--glow-blue);
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 600px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px; /* Tambahkan padding untuk form di mobile */
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--darker-bg);
+    border: 1px solid rgba(0, 188, 212, 0.3); /* Border input dengan glow */
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 1em;
+    outline: none; /* Hilangkan outline default browser */
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    min-height: 44px; /* Untuk aksesibilitas mobile */
+}
+
+.contact-form textarea {
+    resize: vertical; /* Izinkan user mengubah tinggi textarea */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--glow-blue);
+    box-shadow: 0 0 8px var(--glow-blue);
+}
+
+.contact-form .btn {
+    align-self: flex-end; /* Posisikan tombol di kanan bawah */
+    width: auto; /* Agar tombol tidak selalu 100% lebar di mobile */
+}
+
+/* Social Links */
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Biarkan ikon membungkus ke baris berikutnya jika terlalu banyak */
+}
+
+.social-icon {
+    font-size: 1.2em;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    min-height: 44px; /* Untuk aksesibilitas mobile */
+    min-width: 44px; /* Untuk aksesibilitas mobile */
+    display: flex; /* Untuk memusatkan teks/ikon di dalamnya */
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon.glow-icon {
+    color: var(--glow-blue);
+    text-shadow: 0 0 5px var(--glow-blue);
+}
+
+.social-icon.glow-icon:hover {
+    background-color: var(--glow-blue);
+    color: var(--dark-bg);
+    text-shadow: none;
+    box-shadow: 0 0 15px var(--glow-blue);
+    transform: translateY(-5px);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--darker-bg);
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--light-grey);
+    border-top: 1px solid rgba(0, 188, 212, 0.1);
+}
+
+/* Responsive Design (Media Queries) */
+@media (max-width: 992px) {
+    /* Hamburger menu toggle tampil di mobile */
+    .menu-toggle {
+        display: flex; /* Tampilkan hamburger icon */
+    }
+
+    /* Sembunyikan nav-links secara default di mobile */
+    .nav-links {
+        display: none; /* Sembunyikan menu */
+        flex-direction: column; /* Link akan menumpuk vertikal saat ditampilkan */
+        position: absolute;
+        top: 60px; /* Sesuaikan dengan tinggi header */
+        left: 0;
+        width: 100%;
+        background-color: var(--darker-bg); /* Latar belakang menu saat terbuka */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        padding: 20px 0;
+        border-top: 1px solid rgba(0, 188, 212, 0.2);
+        z-index: 999; /* Di bawah toggle, di atas konten */
+        transition: transform 0.3s ease-out; /* Animasi slide in/out */
+        transform: translateX(-100%); /* Sembunyikan ke kiri */
+        gap: 0; /* Atur ulang gap */
+    }
+
+    .nav-links li {
+        margin: 0;
+        padding: 10px 20px;
+        text-align: left; /* Rata kiri untuk link di menu mobile */
+        border-bottom: 1px solid rgba(0, 188, 212, 0.05); /* Garis pemisah antar link */
+    }
+    .nav-links li:last-child {
+        border-bottom: none; /* Tidak ada garis di link terakhir */
+    }
+    .nav-links a {
+        font-size: 1.2em; /* Ukuran font link di menu mobile */
+        display: block; /* Agar link memenuhi seluruh area li */
+        padding: 0; /* Hapus padding default a */
+    }
+
+    /* Kelas yang ditambahkan JS saat menu aktif */
+    .nav-links.is-active {
+        display: flex; /* Tampilkan menu */
+        transform: translateX(0); /* Geser masuk */
+    }
+
+    /* Penyesuaian umum untuk layar tablet dan yang lebih kecil */
+    .hero-container {
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .hero-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-item {
+        margin-bottom: 20px;
+    }
+
+    .contact-form {
+        padding: 0 15px;
+    }
+
+    .social-links {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+    .container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+
+    .hero-content p {
+        font-size: 0.9em;
+    }
+
+    .hero-image img {
+        width: 150px;
+        height: 150px;
+    }
+    .hero-container {
+        gap: 15px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    .footer {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+    .nav-links a { /* Untuk link di dalam menu toggle saat dibuka */
+        font-size: 1.1em;
+    }
+}
